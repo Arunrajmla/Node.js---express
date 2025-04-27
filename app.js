@@ -1,19 +1,16 @@
-// const http = require('http')
 const express = require('express')
 const app = express()
+const roter = require('./routes/authroutes');
 
-app.use((req,res,next)=>{
-    // console.log(req.url);
-    // console.log('Yes we did it !!')
+app.use("/methods",roter)
+
+app.get('/',(req,res,next)=>{
+    res.send({status:"UP"} );
     next();
 })
 
-app.use((req,res)=>{
-    res.send('<h1> Hai </h1>')
-    // console.log('Yes we did it again!!')
+app.use((req,res,next)=>{
+    res.status(404).send('Page not found !!')
 })
-
-// const server = http.createServer(app)
-// server.listen(3000)
 
 app.listen(3000)
